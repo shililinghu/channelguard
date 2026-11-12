@@ -1,0 +1,24 @@
+Process routing backend in ChannelGuard 0.1.4
+
+ProxyBridge (MIT), copyright InterceptSuite contributors.
+Upstream: https://github.com/InterceptSuite/ProxyBridge
+Pinned commit: cb897b017a88a142ec803c3af138b0ad75c2ae12
+Modified complete Windows C sources: _internal/vendor/process_router/source/
+License: _internal/vendor/process_router/ProxyBridge-LICENSE.txt
+Changes: missing proxy IDs do not select another channel; invalid/unsupported proxy rules block;
+upstream broad firewall allowance removed in favor of temporary host/port-scoped rules;
+ancestor matching validates parent creation time before inheriting full-path rules.
+Build recipe: source/build_native.py and source/native_children.c; x64 MSVC, static CRT.
+The recipe downloads nothing. Development source inputs use the pinned upstream Windows/src
+and official WinDivert distribution in build/thirdparty/ as documented in PROVENANCE.json.
+
+WinDivert 2.2.2-A (LGPL v3; optional GPL v2 licensing also described upstream).
+Official distribution: https://github.com/basil00/WinDivert/releases/tag/v2.2.2
+Unmodified x64 DLL and signed driver: _internal/vendor/process_router/
+License: _internal/vendor/process_router/LICENSE-WinDivert.txt
+Corresponding upstream source: _internal/vendor/process_router/WinDivert-2.2.2-source.zip
+The WinDivert DLL is dynamically linked and replaceable with a compatible build;
+rebuild/update PROVENANCE.json when deliberately replacing any integrity-checked components.
+No changes to WinDivert source or driver, no new MITM certificate.
+
+ChannelGuard 另新增 native_udp.c / source/cg_udp.c：独立客户端 SOCKS UDP 关联，回复按进程、信道、源端口和目标校验；不再使用共享关联的最近活跃连接反查。限制 256 会话，60 秒空闲清理，FD_SETSIZE=1024。构建源文件随包提供。

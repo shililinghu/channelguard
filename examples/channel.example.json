@@ -1,0 +1,18 @@
+{
+  "notice": "Fictional example only. No real person, account or machine is represented.",
+  "name": "Demo Channel",
+  "node": {
+    "name": "Fictional SOCKS proxy",
+    "type": "socks5",
+    "server": "192.0.2.10",
+    "port": 1080,
+    "username": "demo-user",
+    "password": "REPLACE_LOCALLY"
+  },
+  "interface": "",
+  "timezone": "UTC",
+  "locale": "en-US",
+  "geo": "deny",
+  "latitude": 0,
+  "longitude": 0
+}
